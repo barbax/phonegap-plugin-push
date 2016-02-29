@@ -3,15 +3,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:amazon="http://schemas.android.com/apk/lib/com.amazon.device.ads"
     xmlns:rim="http://www.blackberry.com/ns/widgets"
-    id="phonegap-plugin-push"
+    id="pushape-cordova-push"
     version="1.5.3">
 
-  <name>PushPlugin</name>
+  <name>Pushape Push Plugin</name>
 	<description>
-		This plugin allows your application to receive push notifications on Android, iOS and Windows devices.
-    Android uses Google Cloud Messaging.
-    iOS uses Apple APNS Notifications.
-    Windows uses Microsoft WNS Notifications.
+		This plugin allows your application to receive push notifications using Pushape Backend
 	</description>
 
 	<license>MIT</license>

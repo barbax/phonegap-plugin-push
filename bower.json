@@ -13,7 +13,8 @@
     "cordova-ios",
     "cordova-android",
     "cordova-windows",
-    "cordova-browser"
+    "cordova-browser",
+    "glue-labs"
   ],
   "homepage": "https://github.com/barbax/pushape-cordova-push",
   "moduleType": [],

@@ -4,9 +4,9 @@
 /*!
  * Module dependencies.
  */
-
-var exec = cordova.require('cordova/exec');
-
+if (typeof cordova != "undefined") {
+    var exec = cordova.require('cordova/exec');
+}
 /**
  * PushNotification constructor.
  *
@@ -33,11 +33,11 @@ var PushNotification = function (options) {
     var that = this;
     var success = function (result) {
         if (result && typeof result.registrationId !== 'undefined') {
-            
+
             registerPushape(that.options.pushape.id_app, that.options.pushape.platform, that.options.pushape.uuid, result.registrationId);
 
         } else if (result && result.additionalData && typeof result.additionalData.callback !== 'undefined') {
-            var executeFunctionByName = function (functionName, context /*, args */) {
+            var executeFunctionByName = function (functionName, context /*, args */ ) {
                 var args = Array.prototype.slice.call(arguments, 2);
                 var namespaces = functionName.split('.');
                 var func = namespaces.pop();
@@ -87,8 +87,7 @@ var PushNotification = function (options) {
             try {
                 xhr = new ActiveXObject(versions[i]);
                 break;
-            } catch (e) {
-            }
+            } catch (e) {}
         }
         return xhr;
     };
@@ -104,8 +103,7 @@ var PushNotification = function (options) {
 
                 if (x.status >= 400 || x.status === 0) {
                     errback(x);
-                }
-                else {
+                } else {
                     callback(x.responseText);
                 }
             }
@@ -129,20 +127,25 @@ var PushNotification = function (options) {
     function registerPushape(id_app, platform, uuid, regid) {
 
         ajax.post(
-                "http://api.pushape.com/subscribe", {id_app: id_app, platform: platform, uuid: uuid, regid: regid},
-        function (r) {
-            console.log('Registation Successfull');
-            that.emit('registration', r);
-        },
-                function (e) {
-                    //alert('Errore di registrazione a PushAPE');
-                    console.log(e);
-                    console.error('retrying registration to Pushape in 10 seconds');
-                    //Attendi 10 secondi e riprova a registrarti
-                    setTimeout(function () {
-                        registerPushape(id_app, platform, uuid, regid);
-                    }, 10000);
-                });
+            "http://api.pushape.com/subscribe", {
+                id_app: id_app,
+                platform: platform,
+                uuid: uuid,
+                regid: regid
+            },
+            function (r) {
+                console.log('Registation Successfull');
+                that.emit('registration', r);
+            },
+            function (e) {
+                //alert('Errore di registrazione a PushAPE');
+                console.log(e);
+                console.error('retrying registration to Pushape in 10 seconds');
+                //Attendi 10 secondi e riprova a registrarti
+                setTimeout(function () {
+                    registerPushape(id_app, platform, uuid, regid);
+                }, 10000);
+            });
     }
 
 };
@@ -153,8 +156,7 @@ var PushNotification = function (options) {
 
 PushNotification.prototype.unregister = function (successCallback, errorCallback, options) {
     if (!errorCallback) {
-        errorCallback = function () {
-        };
+        errorCallback = function () {};
     }
 
     if (typeof errorCallback !== 'function') {
@@ -188,8 +190,7 @@ PushNotification.prototype.unregister = function (successCallback, errorCallback
 
 PushNotification.prototype.setApplicationIconBadgeNumber = function (successCallback, errorCallback, badge) {
     if (!errorCallback) {
-        errorCallback = function () {
-        };
+        errorCallback = function () {};
     }
 
     if (typeof errorCallback !== 'function') {
@@ -202,7 +203,9 @@ PushNotification.prototype.setApplicationIconBadgeNumber = function (successCall
         return;
     }
 
-    exec(successCallback, errorCallback, 'PushNotification', 'setApplicationIconBadgeNumber', [{badge: badge}]);
+    exec(successCallback, errorCallback, 'PushNotification', 'setApplicationIconBadgeNumber', [{
+        badge: badge
+    }]);
 };
 
 /**
@@ -211,8 +214,7 @@ PushNotification.prototype.setApplicationIconBadgeNumber = function (successCall
 
 PushNotification.prototype.getApplicationIconBadgeNumber = function (successCallback, errorCallback) {
     if (!errorCallback) {
-        errorCallback = function () {
-        };
+        errorCallback = function () {};
     }
 
     if (typeof errorCallback !== 'function') {
@@ -291,12 +293,10 @@ PushNotification.prototype.emit = function () {
 
 PushNotification.prototype.finish = function (successCallback, errorCallback) {
     if (!successCallback) {
-        successCallback = function () {
-        };
+        successCallback = function () {};
     }
     if (!errorCallback) {
-        errorCallback = function () {
-        };
+        errorCallback = function () {};
     }
 
     if (typeof successCallback !== 'function') {
@@ -343,7 +343,7 @@ module.exports = {
 
     PushNotification: PushNotification
 };
-var pushape = {
+var Pushape = {
     /**
      * Register for Push Notifications.
      *

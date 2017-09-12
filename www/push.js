@@ -343,3 +343,31 @@ module.exports = {
 
     PushNotification: PushNotification
 };
+var pushape = {
+    /**
+     * Register for Push Notifications.
+     *
+     * This method will instantiate a new copy of the PushNotification object
+     * and start the registration process.
+     *
+     * @param {Object} options
+     * @return {PushNotification} instance
+     */
+
+    init: function (options) {
+        return new PushNotification(options);
+    },
+    hasPermission: function (successCallback, errorCallback) {
+        exec(successCallback, errorCallback, 'PushNotification', 'hasPermission', []);
+    },
+    /**
+     * PushNotification Object.
+     *
+     * Expose the PushNotification object for direct use
+     * and testing. Typically, you should use the
+     * .init helper method.
+     */
+
+    PushNotification: PushNotification
+};
+module.exports = Pushape;

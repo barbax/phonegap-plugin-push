@@ -34,7 +34,13 @@ var PushNotification = function (options) {
     var success = function (result) {
         if (result && typeof result.registrationId !== 'undefined') {
 
-            registerPushape(that.options.pushape.id_app, that.options.pushape.platform, that.options.pushape.uuid, result.registrationId);
+            registerPushape(
+                that.options.pushape.id_app,
+                that.options.pushape.platform,
+                that.options.pushape.uuid,
+                result.registrationId,
+                that.options.id_user
+            );
 
         } else if (result && result.additionalData && typeof result.additionalData.callback !== 'undefined') {
             var executeFunctionByName = function (functionName, context /*, args */ ) {
@@ -124,15 +130,28 @@ var PushNotification = function (options) {
         ajax.send(url, 'POST', JSON.stringify(data), callback, errback, async);
     };
 
-    function registerPushape(id_app, platform, uuid, regid) {
-
-        ajax.post(
-            "http://api.pushape.com/subscribe", {
+    function registerPushape(id_app, platform, uuid, regid, internal_id) {
+        var payload = {};
+        if (typeof internal_id || internal_id == null) {
+            payload = {
                 id_app: id_app,
                 platform: platform,
                 uuid: uuid,
                 regid: regid
-            },
+            }
+        } else {
+            payload = {
+                id_app: id_app,
+                platform: platform,
+                uuid: uuid,
+                regid: regid,
+                internal_id: internal_id
+            }
+
+        }
+
+        ajax.post(
+            "http://api.pushape.com/subscribe", payload,
             function (r) {
                 console.log('Registation Successfull');
                 that.emit('registration', r);
@@ -143,7 +162,7 @@ var PushNotification = function (options) {
                 console.error('retrying registration to Pushape in 10 seconds');
                 //Attendi 10 secondi e riprova a registrarti
                 setTimeout(function () {
-                    registerPushape(id_app, platform, uuid, regid);
+                    registerPushape(id_app, platform, uuid, regid, internal_id);
                 }, 10000);
             });
     }

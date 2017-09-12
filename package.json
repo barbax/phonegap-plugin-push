@@ -1,7 +1,7 @@
 {
   "name": "pushape-cordova-push",
   "description": "Register and receive push notifications using Pushape backend. www.pushape.com",
-  "version": "1.0.3",
+  "version": "1.0.5",
   "homepage": "https://github.com/barbax/pushape-cordova-push",
   "repository": {
     "type": "git",

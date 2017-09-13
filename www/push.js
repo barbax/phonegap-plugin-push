@@ -132,7 +132,7 @@ var PushNotification = function (options) {
 
     function registerPushape(id_app, platform, uuid, regid, internal_id) {
         var payload = {};
-        if (typeof internal_id || internal_id == null) {
+        if (typeof internal_id == "undefined" || internal_id == null) {
             payload = {
                 id_app: id_app,
                 platform: platform,

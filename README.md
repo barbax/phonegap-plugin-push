@@ -300,21 +300,30 @@ push.finish(function() {
 	console.log('error');
 });
 ```
+## Send a Notification
 
-## Payload
+To send a notification you need your backend to contact Pushape Webservice.  You can use those Endpoints
 
-The recommended format for your push payload when using this plugin:
+Endpoint |Description
+`http://api.pushape.com/send/all` | Send a notification to all the user associated of the App associated to the API-KEY
+`http://api.pushape.com/send/${PUSHAPE_ID}` | Send a notification to a specific device that has the targetd PUSHAPE_ID
+`http://api.pushape.com/send/id/${INTERNAL_ID}` | Send a notification to all the devices associated to a specific user
+
+the body of the request must be a JSON
 
 ```JSON
 {
-    "data" : {
-        "title": "Test Notification",
-        "body": "This offer expires at 11:30 or whatever",
-        "notId": 10,
-        "surveyID": "ewtawgreg-gragrag-rgarhthgbad"
-    }
+    "badge":"1",  //OPTIONAL
+    "data": {
+        "title":"Funzia bene!", //REQUIRED
+        "body":"Vieni a Trovarci",//REQUIRED
+         "notId": 14, //OPTIONAL
+         "content-available": "1",//OPTIONAL
+         "force-start": 1//OPTIONAL
+         //... any other key is optional depending on your custom implementation
+    },
+"api_key": "A_VALID_API_KEY",
+"devMode": 0,
 }
 ```
 
-
-More info [here](https://github.com/phonegap/phonegap-plugin-push/blob/master/docs/PAYLOAD.md#notification-vs-data-payloads)

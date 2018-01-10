@@ -30,11 +30,11 @@ let push = Pushape.init({
 		sound: "false"
 	},
     pushape: {
-        "id_app": <your-pushape-app-id>,
-        "platform": <device-platform>,
+        "id_app": <your-pushape-app-id>, //your pushape app id
+        "platform": <device-platform>, //ios or android
         "uuid": <device-uuid>
     },
-    "id_user": <user-id>
+    "id_user": <user-id> //YOUR USER ID, in order to send notification usng your custom id
 });
 
 push.on('registration', function(data) {
@@ -123,13 +123,14 @@ The event `registration` will be triggered on each successful registration with 
 
 Parameter | Type | Description
 --------- | ---- | -----------
-`data.registrationId` | `string` | The registration ID provided by the 3rd party remote push service.
+`data.push_id` | `string` | The PUSHAPE_ID that identify the specific device for the current application
 
 ### Example
 
 ```javascript
 push.on('registration', function(data) {
-    console.log(data.registrationId);
+    console.log(data.push_id);
+    //You need to save the push_id in your server if you want to address a notification to a specific device, instead of user
 });
 ```
 

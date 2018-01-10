@@ -306,11 +306,11 @@ push.finish(function() {
 To send a notification you need your backend to contact Pushape Webservice.  You can use those Endpoints
 
 
-Endpoint | Description 
--------- | ----------- 
-`http://api.pushape.com/send/all` |Send a notification to all the user of the App associated to the API-KEY
-`http://api.pushape.com/send/<PUSHAPE_ID>` | Send a notification to a specific device that has the targeted PUSHAPE_ID
-`http://api.pushape.com/send/id/<INTERNAL_ID>` | Send a notification to all the devices associated to a specific user using your user id
+Endpoint | Method |Description 
+-------- | -------|----------- 
+`http://api.pushape.com/send/all` | POST |Send a notification to all the user of the App associated to the API-KEY
+`http://api.pushape.com/send/<PUSHAPE_ID>` |POST| Send a notification to a specific device that has the targeted PUSHAPE_ID
+`http://api.pushape.com/send/id/<INTERNAL_ID>` | POST | Send a notification to all the devices associated to a specific user using your user id
 
 the body of the request must be a JSON
 

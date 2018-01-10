@@ -12,6 +12,8 @@ ionic cordova plugins add pushape-cordova-push
 
 ## Example
 
+In your `app.component.ts`:
+
 ```javascript
 import Pushape from "pushape-cordova-push/www/push";
 
@@ -35,6 +37,8 @@ let push = Pushape.init({
     "id_user": <user-id>
 });
 ```
+**Note**
+The `id_user` parameter is optional and let you map the internal id to send notification to the specific user using your own id.
 
 ## Usage
 
@@ -280,32 +284,20 @@ push.finish(function() {
 });
 ```
 
-## Common errors
+## Payload
 
-### minSdkVersion === 14
+The recommended format for your push payload when using this plugin:
 
-If you have an issue compiling the app and you are getting an error similar to this:
-
-```
-* What went wrong:
-Execution failed for task ':processDebugManifest'.
-> Manifest merger failed : uses-sdk:minSdkVersion 14 cannot be smaller than version 15 declared in library .../platforms/android/build/intermediates/exploded-aar/com.facebook.android/facebook-android-sdk/4.6.0/AndroidManifest.xml
-  	Suggestion: use tools:overrideLibrary="com.facebook" to force usage
-```
-
-Then you can add the following entry into your config.xml file in the android platform tag:
-
-```xml
-<platform name="android">
-    <preference name="android-minSdkVersion" value="15"/>
- </platform>
+```JSON
+{
+    "data" : {
+        "title": "Test Notification",
+        "body": "This offer expires at 11:30 or whatever",
+        "notId": 10,
+        "surveyID": "ewtawgreg-gragrag-rgarhthgbad"
+    }
+}
 ```
 
-or compile your project using the following command, if the solution above doesn't work for you. Basically add `-- --minSdkVersion=15` to the end of the command line (mind the extra `--`, it's needed):
 
-```bash
-cordova compile android -- --minSdkVersion=15
-cordova build android -- --minSdkVersion=15
-cordova run android -- --minSdkVersion=15
-cordova emulate android -- --minSdkVersion=15
-```
+More info [here](https://github.com/phonegap/phonegap-plugin-push/blob/master/docs/PAYLOAD.md#notification-vs-data-payloads)

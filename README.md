@@ -36,6 +36,23 @@ let push = Pushape.init({
     },
     "id_user": <user-id>
 });
+
+push.on('registration', function(data) {
+	// data.registrationId
+});
+
+push.on('notification', function(data) {
+	// data.message,
+	// data.title,
+	// data.count,
+	// data.sound,
+	// data.image,
+	// data.additionalData
+});
+
+push.on('error', function(e) {
+	// e.message
+});
 ```
 **Note**
 The `id_user` parameter is optional and let you map the internal id to send notification to the specific user using your own id.

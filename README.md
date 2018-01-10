@@ -25,11 +25,11 @@ let push = Pushape.init({
 	ios: {
 		alert: "true",
 		badge: true,
-		sound: 'false'
+		sound: "false"
 	},
     pushape: {
         "id_app": <your-pushape-app-id>,
-        "platform: <device-platform>,
+        "platform": <device-platform>,
         "uuid": <device-uuid>
     },
     "id_user": <user-id>

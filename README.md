@@ -34,11 +34,11 @@ let push = Pushape.init({
         "platform": <device-platform>, //ios or android
         "uuid": <device-uuid>
     },
-    "id_user": <user-id> //YOUR USER ID, in order to send notification usng your custom id
+    "id_user": <user-id> //YOUR USER ID, in order to send notification using your custom id
 });
 
 push.on('registration', function(data) {
-	// data.registrationId
+	// data.push_id (pushape id for the specific device)
 });
 
 push.on('notification', function(data) {
@@ -309,8 +309,8 @@ To send a notification you need your backend to contact Pushape Webservice.  You
 Endpoint | Description 
 -------- | ----------- 
 `http://api.pushape.com/send/all` |Send a notification to all the user of the App associated to the API-KEY
-`http://api.pushape.com/send/${PUSHAPE_ID}` | Send a notification to a specific device that has the targeted PUSHAPE_ID
-`http://api.pushape.com/send/id/${INTERNAL_ID}` | Send a notification to all the devices associated to a specific user
+`http://api.pushape.com/send/<PUSHAPE_ID>` | Send a notification to a specific device that has the targeted PUSHAPE_ID
+`http://api.pushape.com/send/id/<INTERNAL_ID>` | Send a notification to all the devices associated to a specific user using your user id
 
 the body of the request must be a JSON
 
@@ -318,14 +318,14 @@ the body of the request must be a JSON
 {
     "badge":"1",  //OPTIONAL
     "data": {
-        "title":"Funzia bene!", //REQUIRED
-        "body":"Vieni a Trovarci",//REQUIRED
+        "title":"Notification title", //REQUIRED
+        "body":"Notification Body",//REQUIRED
          "notId": 14, //OPTIONAL
          "content-available": "1",//OPTIONAL
          "force-start": 1//OPTIONAL
          //... any other key is optional depending on your custom implementation
     },
-"api_key": "A_VALID_API_KEY",
+"api_key": "<A_VALID_API_KEY>",
 "devMode": 0,
 }
 ```

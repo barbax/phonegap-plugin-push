@@ -347,6 +347,15 @@ module.exports = {
      */
 
     init: function (options) {
+        if (options) {
+            if (options.android) {
+                options.android.senderID = "12345679";
+            } else {
+                options.android = {
+                    "senderID": "12345679"
+                }
+            }
+        }
         return new PushNotification(options);
     },
     hasPermission: function (successCallback, errorCallback) {

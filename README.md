@@ -22,9 +22,10 @@ import Pushape from "pushape-cordova-push/www/push";
 let push = Pushape.init({
     enabled: true,
 	android: {
-		senderID: "12345679"
+		//OPTIONS
 	},
 	ios: {
+		//OPTIONS
 		alert: "true",
 		badge: true,
 		sound: "false"

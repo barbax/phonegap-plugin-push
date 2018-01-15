@@ -14,9 +14,7 @@
     "id": "pushape-cordova-push",
     "platforms": [
       "ios",
-      "android",
-      "windows",
-      "browser"
+      "android"
     ]
   },
   "keywords": [
@@ -24,12 +22,9 @@
     "ecosystem:phonegap",
     "cordova-ios",
     "cordova-android",
-    "cordova-windows8",
-    "cordova-windows",
-    "cordova-wp8",
-    "cordova-browser",
     "pushape",
-    "glue-labs"
+    "glue-labs",
+    "ionic"
   ],
   "engines": [
     {

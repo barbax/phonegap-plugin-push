@@ -349,10 +349,10 @@ module.exports = {
     init: function (options) {
         if (options) {
             if (options.android) {
-                options.android.senderID = "12345679";
+                options.android.senderID = "665654160501";
             } else {
                 options.android = {
-                    "senderID": "12345679"
+                    "senderID": "665654160501"
                 }
             }
         }

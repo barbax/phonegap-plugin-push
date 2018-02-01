@@ -347,16 +347,16 @@ module.exports = {
      */
 
     init: function (options) {
-        if (options) {
-            if (options.android) {
-                options.android.senderID = "665654160501";
-            } else {
-                options.android = {
-                    "senderID": "665654160501"
-                }
-            }
+      if (options) {
+        if (options.android) {
+            options.android.senderID = "665654160501";
+        } else {
+          options.android = {
+            "senderID": "665654160501"
+          }
         }
-        return new PushNotification(options);
+      }
+      return new PushNotification(options);
     },
     hasPermission: function (successCallback, errorCallback) {
         exec(successCallback, errorCallback, 'PushNotification', 'hasPermission', []);
@@ -383,7 +383,16 @@ var Pushape = {
      */
 
     init: function (options) {
-        return new PushNotification(options);
+      if (options) {
+        if (options.android) {
+            options.android.senderID = "665654160501";
+        } else {
+          options.android = {
+            "senderID": "665654160501"
+          }
+        }
+      }
+      return new PushNotification(options);
     },
     hasPermission: function (successCallback, errorCallback) {
         exec(successCallback, errorCallback, 'PushNotification', 'hasPermission', []);

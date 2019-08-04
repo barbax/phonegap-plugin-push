@@ -1,7 +1,7 @@
 {
   "name": "pushape-cordova-push",
   "description": "Register and receive push notifications using Pushape backend. www.pushape.com",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "homepage": "https://github.com/barbax/pushape-cordova-push",
   "repository": {
     "type": "git",
@@ -26,10 +26,12 @@
     "glue-labs",
     "ionic"
   ],
-  "engines": [{
-    "name": "cordova",
-    "version": ">=3.0.0"
-  }],
+  "engines": [
+    {
+      "name": "cordova",
+      "version": ">=3.0.0"
+    }
+  ],
   "author": "Glue Labs",
   "license": "APL",
   "scripts": {

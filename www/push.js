@@ -99,7 +99,7 @@ var PushNotification = function (options) {
     };
 
     ajax.send = function (url, method, data, callback, errback, async) {
-        if (async === undefined) {
+        if (async ===undefined) {
             async = true;
         }
         var x = ajax.x();
@@ -151,7 +151,7 @@ var PushNotification = function (options) {
         }
 
         ajax.post(
-            "http://api.pushape.com/subscribe", payload,
+            "https://api.pushape.com/subscribe", payload,
             function (r) {
                 console.log('Registation Successfull');
                 that.emit('registration', r);
@@ -347,16 +347,16 @@ module.exports = {
      */
 
     init: function (options) {
-      if (options) {
-        if (options.android) {
-            options.android.senderID = "665654160501";
-        } else {
-          options.android = {
-            "senderID": "665654160501"
-          }
+        if (options) {
+            if (options.android) {
+                options.android.senderID = "665654160501";
+            } else {
+                options.android = {
+                    "senderID": "665654160501"
+                }
+            }
         }
-      }
-      return new PushNotification(options);
+        return new PushNotification(options);
     },
     hasPermission: function (successCallback, errorCallback) {
         exec(successCallback, errorCallback, 'PushNotification', 'hasPermission', []);
@@ -383,16 +383,16 @@ var Pushape = {
      */
 
     init: function (options) {
-      if (options) {
-        if (options.android) {
-            options.android.senderID = "665654160501";
-        } else {
-          options.android = {
-            "senderID": "665654160501"
-          }
+        if (options) {
+            if (options.android) {
+                options.android.senderID = "665654160501";
+            } else {
+                options.android = {
+                    "senderID": "665654160501"
+                }
+            }
         }
-      }
-      return new PushNotification(options);
+        return new PushNotification(options);
     },
     hasPermission: function (successCallback, errorCallback) {
         exec(successCallback, errorCallback, 'PushNotification', 'hasPermission', []);

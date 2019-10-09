@@ -1,8 +1,8 @@
 {
-  "name": "pushape-cordova-push-4",
+  "name": "pushape-cordova-push",
   "description": "Register and receive push notifications using Pushape backend. Refer to the www.pushape.com website.",
   "types": "./types/index.d.ts",
-  "version": "2.3.0",
+  "version": "2.0.0",
   "homepage": "https://github.com/ptesser/phonegap-plugin-push#readme",
   "repository": {
     "type": "git",

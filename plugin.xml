@@ -5,8 +5,8 @@
   xmlns:amazon="http://schemas.android.com/apk/lib/com.amazon.device.ads"
   xmlns:rim="http://www.blackberry.com/ns/widgets"
   id="pushape-cordova-push"
-  version="2.0.0">
-  <name>Pushape Push Plugin 4</name>
+  version="2.0.1">
+  <name>Pushape Push Plugin</name>
   <description>This plugin allows your application to receive push notifications using Pushape Backend</description>
   <license>MIT</license>
   <js-module src="www/push.js" name="PushNotification">

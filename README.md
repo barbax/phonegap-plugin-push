@@ -22,7 +22,7 @@ import Pushape from "pushape-cordova-push/www/push";
 let push = Pushape.init({
     enabled: true,
 	android: {
-		//OPTIONS
+        'senderID': <your-firebase-sender-id>
 	},
 	ios: {
 		//OPTIONS

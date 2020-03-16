@@ -14,10 +14,12 @@ jobs:
       uses: actions/setup-node@master
       with:
         node-version: 10.0.0
-    - name: Yarn Install
+    - name: Dependencies Install
       run: npm install
     - name: Publish
-      run: npm publish --access public  
+      run: |
+        npm config set //registry.npmjs.org/:_authToken=$NODE_AUTH_TOKEN
+        npm publish
     #- name: Publish if version has been updated
      # uses: pascalgn/npm-publish-action@51fdb4531e99aac1873764ef7271af448dc42ab4
      # with: # All of theses inputs are optional

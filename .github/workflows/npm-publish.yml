@@ -15,7 +15,7 @@ jobs:
       with:
         node-version: 10.0.0
     - name: Yarn Install
-      run: yarn install
+      run: npm install
     - name: Publish
       run: npm publish --access public  
     #- name: Publish if version has been updated

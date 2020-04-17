@@ -69,12 +69,15 @@
     "eslint": "eslint src/js",
     "jasmine": "jasmine --config=spec/unit.json",
     "precommit-msg": "echo 'Pre-commit checks...' && exit 0",
-    "test": "npm run build && npm run eslint && npm run jasmine"
+    "test": "npm run build && npm run eslint && npm run jasmine",
+    "commit": "git-cz"
   },
   "devDependencies": {
     "@babel/cli": "^7.5.5",
     "@babel/core": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
+    "@commitlint/cli": "^8.0.0",
+    "@commitlint/config-conventional": "^8.0.0",
     "babel-eslint": "^10.0.3",
     "babel-plugin-add-header-comment": "^1.0.3",
     "eslint": "^6.2.2",
@@ -82,9 +85,28 @@
     "eslint-plugin-import": "^2.18.2",
     "jasmine": "^3.4.0",
     "nodemon": "^1.19.1",
-    "pluginpub": "^0.0.9"
+    "pluginpub": "^0.0.9",
+    "commitizen": "^3.1.1",
+    "conventional-changelog-cli": "^2.0.23",
+    "cz-conventional-changelog": "^2.1.0",
+    "husky": "^2.5.0"
   },
   "dependencies": {
     "install": "^0.8.2"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint --edit"
+    }
   }
 }

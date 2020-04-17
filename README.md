@@ -1,6 +1,6 @@
-# phonegap-plugin-push [![Build Status](https://travis-ci.org/phonegap/phonegap-plugin-push.svg)](https://travis-ci.org/phonegap/phonegap-plugin-push)
+# pushape-plugin-push
 
-> Register and receive push notifications
+> Register and receive push notifications using Pushape back end.
 
 # Warning
 
@@ -32,6 +32,12 @@ on. The best way to do that is use the `device.platform` property provided by
 Starting with version `2.0.0`, this plugin will support `CocoaPods` installation
 of the `Firebase Cloud Messaging` library. More details are available in the
 [Installation](docs/INSTALLATION.md#cocoapods) documentation.
+
+Custom documentation for Pushape.
+
+* [Pushape](docs/PUSHAPE.md)
+
+Basic plugin documentation references.
 
 * [Reporting Issues](docs/ISSUES.md)
 * [Installation](docs/INSTALLATION.md)

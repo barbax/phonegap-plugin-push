@@ -5,3 +5,4 @@
 npm-debug.log
 .tern-project
 package-lock.json
+/nbproject/

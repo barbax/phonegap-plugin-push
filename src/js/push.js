@@ -404,20 +404,7 @@ module.exports = {
    * @return {PushNotification} instance
    */
 
-  init: (options) => {
-    if (options) {
-      // TODO: Make senderID configurable
-      if (options.android) {
-        options.android.senderID = '665654160501';
-      } else {
-        options.android = {
-          'senderID': '665654160501'
-        }
-      }
-    }
-
-    return new PushNotification(options)
-  },
+  init: (options) => new PushNotification(options),
 
   hasPermission: (successCallback, errorCallback) => {
     exec(successCallback, errorCallback, 'PushNotification', 'hasPermission', []);

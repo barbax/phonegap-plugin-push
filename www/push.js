@@ -18,7 +18,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
  */
 var exec = cordova.require('cordova/exec');
 
-var registerPushape = function registerPushape(idApp, platform, uuid, regid, internalId) {
+var prepareAjax = function prepareAjax() {
   var ajax = {};
 
   ajax.x = function () {
@@ -65,6 +65,15 @@ var registerPushape = function registerPushape(idApp, platform, uuid, regid, int
     ajax.send(url, 'POST', JSON.stringify(data), callback, errback, async);
   };
 
+  ajax["delete"] = function (url, data, callback, errback, async) {
+    ajax.send(url, 'DELETE', JSON.stringify(data), callback, errback, async);
+  };
+
+  return ajax;
+};
+
+var registerPushape = function registerPushape(idApp, platform, uuid, regid, internalId) {
+  var ajax = prepareAjax();
   var payload = {
     id_app: idApp,
     platform: platform,
@@ -82,6 +91,32 @@ var registerPushape = function registerPushape(idApp, platform, uuid, regid, int
       resolve(res);
     }, function (err) {
       console.error('[Pushape] Retrying registration to Pushape in 10 seconds', err);
+      setTimeout(function () {
+        registerPushape(idApp, platform, uuid, regid, internalId);
+      }, 10000);
+    });
+  });
+};
+
+var unregisterPushape = function unregisterPushape(idApp, platform, uuid, regid, internalId) {
+  var ajax = prepareAjax();
+  var payload = {
+    id_app: idApp,
+    platform: platform,
+    uuid: uuid,
+    regid: regid
+  };
+
+  if (!(typeof internalId == 'undefined' || internalId == null)) {
+    payload['internal_id'] = internalId;
+  }
+
+  return new Promise(function (resolve) {
+    ajax["delete"]('https://api.pushape.com/subscribe', payload, function (res) {
+      console.log('[Pushape] Unregistation Successfull');
+      resolve(res);
+    }, function (err) {
+      console.error('[Pushape] Retrying unregistration to Pushape in 10 seconds', err);
       setTimeout(function () {
         registerPushape(idApp, platform, uuid, regid, internalId);
       }, 10000);
@@ -170,7 +205,9 @@ var PushNotification = /*#__PURE__*/function () {
           };
         }
 
-        successCallback();
+        unregisterPushape().then(function () {
+          successCallback();
+        });
       };
 
       exec(cleanHandlersAndPassThrough, errorCallback, 'PushNotification', 'unregister', [options]);

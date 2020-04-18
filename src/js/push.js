@@ -4,8 +4,7 @@
 
 const exec = cordova.require('cordova/exec');
 
-
-const registerPushape = (idApp, platform, uuid, regid, internalId) => {
+const prepareAjax = () => {
   const ajax = {};
 
   ajax.x = function () {
@@ -20,7 +19,7 @@ const registerPushape = (idApp, platform, uuid, regid, internalId) => {
       'MSXML2.XmlHttp.2.0',
       'Microsoft.XmlHttp'
     ];
-
+  
     let xhr;
     for (let i = 0; i < versions.length; i++) {
       try {
@@ -30,7 +29,7 @@ const registerPushape = (idApp, platform, uuid, regid, internalId) => {
     }
     return xhr;
   };
-
+  
   ajax.send = function (url, method, data, callback, errback, async) {
     if (async === undefined) {
       async = true;
@@ -46,14 +45,24 @@ const registerPushape = (idApp, platform, uuid, regid, internalId) => {
         }
       }
     };
-
+  
     x.setRequestHeader('Content-type', 'application/json');
     x.send(data);
   };
-
+  
   ajax.post = function (url, data, callback, errback, async) {
     ajax.send(url, 'POST', JSON.stringify(data), callback, errback, async);
   };
+
+  ajax.delete = function(url, data, callback, errback, async) {
+    ajax.send(url, 'DELETE', JSON.stringify(data), callback, errback, async);
+  }
+
+  return ajax;
+}
+
+const registerPushape = (idApp, platform, uuid, regid, internalId) => {
+  const ajax = prepareAjax();
 
   const payload = {
     id_app: idApp,
@@ -82,6 +91,38 @@ const registerPushape = (idApp, platform, uuid, regid, internalId) => {
       });
   });
 }
+
+const unregisterPushape = (idApp, platform, uuid, regid, internalId) => {
+  const ajax = prepareAjax();
+
+  const payload = {
+    id_app: idApp,
+    platform: platform,
+    uuid: uuid,
+    regid: regid,
+  };
+  if (!(typeof internalId == 'undefined' || internalId == null)) {
+    payload['internal_id'] = internalId;
+  }
+
+  return new Promise((resolve) => {
+    ajax.delete(
+      'https://api.pushape.com/subscribe',
+      payload,
+      function (res) {
+        console.log('[Pushape] Unregistation Successfull');
+        resolve(res);
+      },
+      function (err) {
+        console.error('[Pushape] Retrying unregistration to Pushape in 10 seconds', err);
+
+        setTimeout(function () {
+          registerPushape(idApp, platform, uuid, regid, internalId);
+        }, 10000);
+      });
+  });
+}
+
 
 class PushNotification {
   /**
@@ -164,7 +205,10 @@ class PushNotification {
           error: [],
         };
       }
-      successCallback();
+
+      unregisterPushape().then(() => {
+        successCallback();
+      });
     };
 
     exec(cleanHandlersAndPassThrough, errorCallback, 'PushNotification', 'unregister', [options]);

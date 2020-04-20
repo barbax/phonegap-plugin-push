@@ -1,8 +1,11 @@
 /*!
  * Module dependencies.
  */
+let exec;
 
-const exec = cordova.require('cordova/exec');
+if (typeof cordova !== 'undefined') {
+  exec = cordova.require('cordova/exec');
+}
 
 const prepareAjax = () => {
   const ajax = {};

@@ -16,7 +16,11 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 /*!
  * Module dependencies.
  */
-var exec = cordova.require('cordova/exec');
+var exec;
+
+if (typeof cordova !== 'undefined') {
+  exec = cordova.require('cordova/exec');
+}
 
 var prepareAjax = function prepareAjax() {
   var ajax = {};

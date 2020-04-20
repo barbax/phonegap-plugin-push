@@ -2,7 +2,7 @@
   "name": "pushape-cordova-push",
   "description": "Register and receive push notifications using Pushape backend. Refer to the www.pushape.com website.",
   "types": "./types/index.d.ts",
-  "version": "2.3.10",
+  "version": "2.3.11",
   "homepage": "https://github.com/gluelabs/pushape-cordova-push#readme",
   "repository": {
     "type": "git",

@@ -1,4 +1,4 @@
-# pushape-plugin-push
+# pushape-cordova-push
 
 > Register and receive push notifications using Pushape back end.
 

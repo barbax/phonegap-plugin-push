@@ -120,12 +120,11 @@ const unregisterPushape = (idApp, platform, uuid, regid, internalId) => {
         console.error('[Pushape] Retrying unregistration to Pushape in 10 seconds', err);
 
         setTimeout(function () {
-          registerPushape(idApp, platform, uuid, regid, internalId);
+          unregisterPushape(idApp, platform, uuid, regid, internalId);
         }, 10000);
       });
   });
 }
-
 
 class PushNotification {
   /**

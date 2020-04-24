@@ -64,6 +64,14 @@ const prepareAjax = () => {
   return ajax;
 }
 
+/**
+ *
+ * @param {string} idApp
+ * @param {ios | android | chrome} platform
+ * @param {string} uuid
+ * @param {string} regid
+ * @param {string} internalId
+ */
 const registerPushape = (idApp, platform, uuid, regid, internalId) => {
   const ajax = prepareAjax();
 
@@ -95,6 +103,14 @@ const registerPushape = (idApp, platform, uuid, regid, internalId) => {
   });
 }
 
+/**
+ *
+ * @param {string} idApp
+ * @param {ios | android | chrome} platform
+ * @param {string} uuid
+ * @param {string} regid
+ * @param {string} internalId
+ */
 const unregisterPushape = (idApp, platform, uuid, regid, internalId) => {
   const ajax = prepareAjax();
 

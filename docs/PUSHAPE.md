@@ -5,7 +5,23 @@
 
 ## Installation
 
-**TODO**
+### Cordova
+
+To install the plugin in your app:
+
+```
+npm install pushape-cordova-push
+cordova plugins add pushape-cordova-push
+```
+
+### Ionic
+
+To install the plugin in your app:
+
+```
+npm install pushape-cordova-push
+ionic cordova plugins add pushape-cordova-push`
+```
 
 ## Getting Started
 

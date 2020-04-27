@@ -75,18 +75,27 @@ var prepareAjax = function prepareAjax() {
 
   return ajax;
 };
+/**
+ *
+ * @param {string} id_app
+ * @param {ios | android | chrome} platform
+ * @param {string} uuid
+ * @param {string} regid
+ * @param {string} internal_id
+ */
 
-var registerPushape = function registerPushape(idApp, platform, uuid, regid, internalId) {
+
+var registerPushape = function registerPushape(id_app, platform, uuid, regid, internal_id) {
   var ajax = prepareAjax();
   var payload = {
-    id_app: idApp,
+    id_app: id_app,
     platform: platform,
     uuid: uuid,
     regid: regid
   };
 
-  if (!(typeof internalId == 'undefined' || internalId == null)) {
-    payload['internal_id'] = internalId;
+  if (!(typeof internal_id == 'undefined' || internal_id == null)) {
+    payload['internal_id'] = internal_id;
   }
 
   return new Promise(function (resolve) {
@@ -96,25 +105,26 @@ var registerPushape = function registerPushape(idApp, platform, uuid, regid, int
     }, function (err) {
       console.error('[Pushape] Retrying registration to Pushape in 10 seconds', err);
       setTimeout(function () {
-        registerPushape(idApp, platform, uuid, regid, internalId);
+        registerPushape(id_app, platform, uuid, regid, internal_id);
       }, 10000);
     });
   });
 };
+/**
+ *
+ * @param {string} id_app
+ * @param {ios | android | chrome} platform
+ * @param {string} uuid
+ */
 
-var unregisterPushape = function unregisterPushape(idApp, platform, uuid, regid, internalId) {
+
+var unregisterPushape = function unregisterPushape(id_app, platform, uuid) {
   var ajax = prepareAjax();
   var payload = {
-    id_app: idApp,
+    id_app: id_app,
     platform: platform,
-    uuid: uuid,
-    regid: regid
+    uuid: uuid
   };
-
-  if (!(typeof internalId == 'undefined' || internalId == null)) {
-    payload['internal_id'] = internalId;
-  }
-
   return new Promise(function (resolve) {
     ajax["delete"]('https://api.pushape.com/subscribe', payload, function (res) {
       console.log('[Pushape] Unregistation Successfull');
@@ -122,7 +132,7 @@ var unregisterPushape = function unregisterPushape(idApp, platform, uuid, regid,
     }, function (err) {
       console.error('[Pushape] Retrying unregistration to Pushape in 10 seconds', err);
       setTimeout(function () {
-        registerPushape(idApp, platform, uuid, regid, internalId);
+        unregisterPushape(id_app, platform, uuid);
       }, 10000);
     });
   });
@@ -209,7 +219,7 @@ var PushNotification = /*#__PURE__*/function () {
           };
         }
 
-        unregisterPushape().then(function () {
+        unregisterPushape(_this2.options.pushape.id_app, _this2.options.pushape.platform, _this2.options.pushape.uuid).then(function () {
           successCallback();
         });
       };

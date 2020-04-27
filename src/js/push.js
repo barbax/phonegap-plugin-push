@@ -66,38 +66,38 @@ const prepareAjax = () => {
 
 /**
  *
- * @param {string} idApp
+ * @param {string} id_app
  * @param {ios | android | chrome} platform
  * @param {string} uuid
  * @param {string} regid
- * @param {string} internalId
+ * @param {string} internal_id
  */
-const registerPushape = (idApp, platform, uuid, regid, internalId) => {
+const registerPushape = (id_app, platform, uuid, regid, internal_id) => {
   const ajax = prepareAjax();
 
   const payload = {
-    id_app: idApp,
-    platform: platform,
-    uuid: uuid,
-    regid: regid,
+    id_app,
+    platform,
+    uuid,
+    regid,
   };
-  if (!(typeof internalId == 'undefined' || internalId == null)) {
-    payload['internal_id'] = internalId;
+  if (!(typeof internal_id == 'undefined' || internal_id == null)) {
+    payload['internal_id'] = internal_id;
   }
 
   return new Promise((resolve) => {
     ajax.post(
       'https://api.pushape.com/subscribe',
       payload,
-      function (res) {
+      (res) => {
         console.log('[Pushape] Registation Successfull');
         resolve(res);
       },
-      function (err) {
+      (err) => {
         console.error('[Pushape] Retrying registration to Pushape in 10 seconds', err);
 
-        setTimeout(function () {
-          registerPushape(idApp, platform, uuid, regid, internalId);
+        setTimeout(() => {
+          registerPushape(id_app, platform, uuid, regid, internal_id);
         }, 10000);
       });
   });
@@ -105,38 +105,27 @@ const registerPushape = (idApp, platform, uuid, regid, internalId) => {
 
 /**
  *
- * @param {string} idApp
+ * @param {string} id_app
  * @param {ios | android | chrome} platform
  * @param {string} uuid
- * @param {string} regid
- * @param {string} internalId
  */
-const unregisterPushape = (idApp, platform, uuid, regid, internalId) => {
+const unregisterPushape = (id_app, platform, uuid) => {
   const ajax = prepareAjax();
-
-  const payload = {
-    id_app: idApp,
-    platform: platform,
-    uuid: uuid,
-    regid: regid,
-  };
-  if (!(typeof internalId == 'undefined' || internalId == null)) {
-    payload['internal_id'] = internalId;
-  }
+  const payload = { id_app, platform, uuid };
 
   return new Promise((resolve) => {
     ajax.delete(
       'https://api.pushape.com/subscribe',
       payload,
-      function (res) {
+      (res) => {
         console.log('[Pushape] Unregistation Successfull');
         resolve(res);
       },
-      function (err) {
+      (err) => {
         console.error('[Pushape] Retrying unregistration to Pushape in 10 seconds', err);
 
-        setTimeout(function () {
-          unregisterPushape(idApp, platform, uuid, regid, internalId);
+        setTimeout(() => {
+          unregisterPushape(id_app, platform, uuid);
         }, 10000);
       });
   });
@@ -224,7 +213,11 @@ class PushNotification {
         };
       }
 
-      unregisterPushape().then(() => {
+      unregisterPushape(
+        this.options.pushape.id_app,
+        this.options.pushape.platform,
+        this.options.pushape.uuid,
+      ).then(() => {
         successCallback();
       });
     };

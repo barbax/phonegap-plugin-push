@@ -36,6 +36,7 @@ of the `Firebase Cloud Messaging` library. More details are available in the
 Custom documentation for Pushape.
 
 * [Pushape](docs/PUSHAPE.md)
+* [Typescript support](docs/PUSHAPE_TYPESCRIPT.md)
 
 Basic plugin documentation references.
 

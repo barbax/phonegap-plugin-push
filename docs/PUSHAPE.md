@@ -1,6 +1,6 @@
 # Pushape
 
-> Register and receive push notifications using pushape backend
+> Register and receive push notifications using Pushape back end.
 
 
 ## Installation
@@ -27,8 +27,8 @@ ionic cordova plugins add pushape-cordova-push
 
 ```javascript
 import { Device } from '@ionic-native/device/ngx';
-import Pushape from "pushape-cordova-push/www/push";
 
+import PushapeNotification from 'pushape-cordova-push/www/push';
 ...
 
 class PushapeService {
@@ -39,24 +39,24 @@ class PushapeService {
     const push = Pushape.init({
       enabled: true,
       android: {
-        senderID: "<your-firebase-sender-id>" // **NOT MANDATORY**
+        senderID: '<your-firebase-sender-id>' // **NOT MANDATORY**
       },
       ios: {
         // Options
-        alert: "true",
+        alert: 'true',
         badge: true,
-        sound: "false"
+        sound: 'false',
       },
       pushape: {
         platform: this.device.platform, // "<your-pushape-app-id>"
         uuid: this.device.uuid, // "<device-platform>" - ios | android
-        uuid: "<device-uuid>",
+        uuid: '<device-uuid>',
       },
-      id_user: "<user-id>" // in order to send notification using your custom id
+      id_user: '<user-id>' // in order to send notification using your custom id
     });
 
     push.on('registration', (data) => {
-      // data.push_id (pushape id for the specific device)
+      // data.push_id (Pushape id for the specific device)
     });
 
     push.on('notification', (data) => {

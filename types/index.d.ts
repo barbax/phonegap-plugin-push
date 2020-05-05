@@ -390,9 +390,7 @@ declare namespace PhonegapPluginPushapePush {
 }
 
 interface Window {
-	PushNotification: PhonegapPluginPush.PushNotificationStatic,
 	PushapeNotification: PhonegapPluginPushapePush.PushapeNotificationStatic,
 }
 
-declare var PushNotification: PhonegapPluginPush.PushNotificationStatic;
 declare var PushapeNotification: PhonegapPluginPushapePush.PushapeNotificationStatic;

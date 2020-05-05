@@ -131,12 +131,12 @@ const unregisterPushape = (id_app, platform, uuid) => {
   });
 }
 
-class PushNotification {
+class PushapeNotification {
   /**
-   * PushNotification constructor.
+   * PushapeNotification constructor.
    *
    * @param {Object} options to initiate Push Notifications.
-   * @return {PushNotification} instance that can be monitored and cancelled.
+   * @return {PushapeNotification} instance that can be monitored and cancelled.
    */
   constructor(options) {
     this.handlers = {
@@ -184,7 +184,7 @@ class PushNotification {
 
     // wait at least one process tick to allow event subscriptions
     setTimeout(() => {
-      exec(success, fail, 'PushNotification', 'init', [options]);
+      exec(success, fail, 'PushapeNotification', 'init', [options]);
     }, 10);
   }
 
@@ -193,13 +193,13 @@ class PushNotification {
    */
   unregister(successCallback, errorCallback = () => { }, options) {
     if (typeof errorCallback !== 'function') {
-      console.log('PushNotification.unregister failure: failure parameter not a function');
+      console.log('PushapeNotification.unregister failure: failure parameter not a function');
       return;
     }
 
     if (typeof successCallback !== 'function') {
       console.log(
-        'PushNotification.unregister failure: success callback parameter must be a function',
+        'PushapeNotification.unregister failure: success callback parameter must be a function',
       );
       return;
     }
@@ -222,7 +222,7 @@ class PushNotification {
       });
     };
 
-    exec(cleanHandlersAndPassThrough, errorCallback, 'PushNotification', 'unregister', [options]);
+    exec(cleanHandlersAndPassThrough, errorCallback, 'PushapeNotification', 'unregister', [options]);
   }
 
   /**
@@ -234,18 +234,18 @@ class PushNotification {
    */
   subscribe(topic, successCallback, errorCallback = () => { }) {
     if (typeof errorCallback !== 'function') {
-      console.log('PushNotification.subscribe failure: failure parameter not a function');
+      console.log('PushapeNotification.subscribe failure: failure parameter not a function');
       return;
     }
 
     if (typeof successCallback !== 'function') {
       console.log(
-        'PushNotification.subscribe failure: success callback parameter must be a function',
+        'PushapeNotification.subscribe failure: success callback parameter must be a function',
       );
       return;
     }
 
-    exec(successCallback, errorCallback, 'PushNotification', 'subscribe', [topic]);
+    exec(successCallback, errorCallback, 'PushapeNotification', 'subscribe', [topic]);
   }
 
   /**
@@ -257,18 +257,18 @@ class PushNotification {
    */
   unsubscribe(topic, successCallback, errorCallback = () => { }) {
     if (typeof errorCallback !== 'function') {
-      console.log('PushNotification.unsubscribe failure: failure parameter not a function');
+      console.log('PushapeNotification.unsubscribe failure: failure parameter not a function');
       return;
     }
 
     if (typeof successCallback !== 'function') {
       console.log(
-        'PushNotification.unsubscribe failure: success callback parameter must be a function',
+        'PushapeNotification.unsubscribe failure: success callback parameter must be a function',
       );
       return;
     }
 
-    exec(successCallback, errorCallback, 'PushNotification', 'unsubscribe', [topic]);
+    exec(successCallback, errorCallback, 'PushapeNotification', 'unsubscribe', [topic]);
   }
 
   /**
@@ -277,7 +277,7 @@ class PushNotification {
   setApplicationIconBadgeNumber(successCallback, errorCallback = () => { }, badge) {
     if (typeof errorCallback !== 'function') {
       console.log(
-        'PushNotification.setApplicationIconBadgeNumber failure: failure '
+        'PushapeNotification.setApplicationIconBadgeNumber failure: failure '
         + 'parameter not a function',
       );
       return;
@@ -285,13 +285,13 @@ class PushNotification {
 
     if (typeof successCallback !== 'function') {
       console.log(
-        'PushNotification.setApplicationIconBadgeNumber failure: success '
+        'PushapeNotification.setApplicationIconBadgeNumber failure: success '
         + 'callback parameter must be a function',
       );
       return;
     }
 
-    exec(successCallback, errorCallback, 'PushNotification', 'setApplicationIconBadgeNumber', [
+    exec(successCallback, errorCallback, 'PushapeNotification', 'setApplicationIconBadgeNumber', [
       { badge },
     ]);
   }
@@ -303,7 +303,7 @@ class PushNotification {
   getApplicationIconBadgeNumber(successCallback, errorCallback = () => { }) {
     if (typeof errorCallback !== 'function') {
       console.log(
-        'PushNotification.getApplicationIconBadgeNumber failure: failure '
+        'PushapeNotification.getApplicationIconBadgeNumber failure: failure '
         + 'parameter not a function',
       );
       return;
@@ -311,13 +311,13 @@ class PushNotification {
 
     if (typeof successCallback !== 'function') {
       console.log(
-        'PushNotification.getApplicationIconBadgeNumber failure: success '
+        'PushapeNotification.getApplicationIconBadgeNumber failure: success '
         + 'callback parameter must be a function',
       );
       return;
     }
 
-    exec(successCallback, errorCallback, 'PushNotification', 'getApplicationIconBadgeNumber', []);
+    exec(successCallback, errorCallback, 'PushapeNotification', 'getApplicationIconBadgeNumber', []);
   }
 
   /**
@@ -327,20 +327,20 @@ class PushNotification {
   clearAllNotifications(successCallback = () => { }, errorCallback = () => { }) {
     if (typeof errorCallback !== 'function') {
       console.log(
-        'PushNotification.clearAllNotifications failure: failure parameter not a function',
+        'PushapeNotification.clearAllNotifications failure: failure parameter not a function',
       );
       return;
     }
 
     if (typeof successCallback !== 'function') {
       console.log(
-        'PushNotification.clearAllNotifications failure: success callback '
+        'PushapeNotification.clearAllNotifications failure: success callback '
         + 'parameter must be a function',
       );
       return;
     }
 
-    exec(successCallback, errorCallback, 'PushNotification', 'clearAllNotifications', []);
+    exec(successCallback, errorCallback, 'PushapeNotification', 'clearAllNotifications', []);
   }
 
   /**
@@ -353,13 +353,13 @@ class PushNotification {
     const idNumber = parseInt(id, 10);
     if (Number.isNaN(idNumber) || idNumber > Number.MAX_SAFE_INTEGER || idNumber < 0) {
       console.log(
-        'PushNotification.clearNotification failure: id parameter must'
+        'PushapeNotification.clearNotification failure: id parameter must'
         + 'be a valid integer.',
       );
       return;
     }
 
-    exec(successCallback, errorCallback, 'PushNotification', 'clearNotification',
+    exec(successCallback, errorCallback, 'PushapeNotification', 'clearNotification',
       [idNumber]);
   }
 
@@ -440,7 +440,7 @@ class PushNotification {
       return;
     }
 
-    exec(successCallback, errorCallback, 'PushNotification', 'finish', [id]);
+    exec(successCallback, errorCallback, 'PushapeNotification', 'finish', [id]);
   }
 }
 
@@ -452,37 +452,37 @@ module.exports = {
   /**
    * Register for Push Notifications.
    *
-   * This method will instantiate a new copy of the PushNotification object
+   * This method will instantiate a new copy of the PushapeNotification object
    * and start the registration process.
    *
    * @param {Object} options
-   * @return {PushNotification} instance
+   * @return {PushapeNotification} instance
    */
 
-  init: (options) => new PushNotification(options),
+  init: (options) => new PushapeNotification(options),
 
   hasPermission: (successCallback, errorCallback) => {
-    exec(successCallback, errorCallback, 'PushNotification', 'hasPermission', []);
+    exec(successCallback, errorCallback, 'PushapeNotification', 'hasPermission', []);
   },
 
   createChannel: (successCallback, errorCallback, channel) => {
-    exec(successCallback, errorCallback, 'PushNotification', 'createChannel', [channel]);
+    exec(successCallback, errorCallback, 'PushapeNotification', 'createChannel', [channel]);
   },
 
   deleteChannel: (successCallback, errorCallback, channelId) => {
-    exec(successCallback, errorCallback, 'PushNotification', 'deleteChannel', [channelId]);
+    exec(successCallback, errorCallback, 'PushapeNotification', 'deleteChannel', [channelId]);
   },
 
   listChannels: (successCallback, errorCallback) => {
-    exec(successCallback, errorCallback, 'PushNotification', 'listChannels', []);
+    exec(successCallback, errorCallback, 'PushapeNotification', 'listChannels', []);
   },
 
   /**
-   * PushNotification Object.
+   * PushapeNotification Object.
    *
-   * Expose the PushNotification object for direct use
+   * Expose the PushapeNotification object for direct use
    * and testing. Typically, you should use the
    * .init helper method.
    */
-  PushNotification,
+  PushapeNotification,
 };
